@@ -1,2 +1,2 @@
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/device_YU5530.mk
+    $(LOCAL_DIR)/omni_wt6755_66_sz_l.mk

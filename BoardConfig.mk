@@ -1,8 +1,9 @@
 USE_CAMERA_STUB := true
 
 # inherit from the proprietary version
--include vendor/yu/YU5530/BoardConfigVendor.mk
+-include vendor/wingtechsz/wt6755_66_sz_l/BoardConfigVendor.mk
 
+# Architecture
 TARGET_ARCH := arm
 TARGET_NO_BOOTLOADER := true
 TARGET_BOARD_PLATFORM := unknown
@@ -13,19 +14,32 @@ TARGET_CPU_VARIANT := cortex-a7
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 
-TARGET_BOOTLOADER_BOARD_NAME := YU5530
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := MT6755
+TARGET_NO_BOOTLOADER := true
 
-BOARD_KERNEL_CMDLINE := 
-BOARD_KERNEL_BASE := 0x
-BOARD_KERNEL_PAGESIZE := 
+# Kernel
+TARGET_PREBUILT_KERNEL := device/wingtechsz/wt6755_66_sz_l/kernel
+TARGET_CUSTOM_KERNEL_HEADERS := device/wingtechsz/wt6755_66_sz_l/include
+BOARD_CUSTOM_BOOTIMG_MK := device/wingtechsz/wt6755_66_sz_l/mkbootimg.mk
+BOARD_KERNEL_CMDLINE := bootopt=64S3,32N2,64N2 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 40078000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x04f88000 --dt device/wingtechsz/wt6755_66_sz_l/dt.img
 
-# fix this up by examining /proc/mtd on a running device
+# Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00380000
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00480000
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x08c60000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x105c0000
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-TARGET_PREBUILT_KERNEL := device/yu/YU5530/kernel
-
+# TWRP FLAGS
 BOARD_HAS_NO_SELECT_BUTTON := true
+BOARD_RECOVERY_SWIPE := true
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+TARGET_RECOVERY_PIXEL_FORMAT := BGRA_8888
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_INCLUDE_CRYPTO := true
+TW_NEW_ION_HEAP := true
+TW_THEME := portrait_hdpi
